@@ -16,6 +16,7 @@ export default function Chat({ match }) {
   const { id } = match.params;
   const [loading, setLoading] = useState(true);
   const [recipient, setRecipent] = useState({});
+  const [myState, setMyState] = useState(false);
   const [text, setText] = useState("");
   const [messages, setMessages] = useState([]);
   const token = useSelector(state => state.auth.token);
@@ -33,19 +34,17 @@ export default function Chat({ match }) {
   useEffect(() => {
     const chat = ws.getSubscription(channel) || ws.subscribe(channel);
 
-    chat.on("message", ({ content, to }) => {
-      setMessages([...messages, { content, owner: to !== user.id }]);
+    chat.on("message", ({ content, to, error }) => {
+      setMessages([...messages, { content, owner: to !== user.id, error }]);
     });
 
-    chat.on("ready", () => alert("ready"));
+    chat.on("ready", () => setMyState(true));
 
-    chat.on("open", () => alert("open"));
+    chat.on("error", () => setMyState(false));
 
-    chat.on("error", () => alert("error"));
+    chat.on("leaveError", () => setMyState(false));
 
-    chat.on("leaveError", () => alert("leaveError"));
-
-    chat.on("close", () => alert("close"));
+    chat.on("close", () => setMyState(false));
   }, [channel, messages, user.id, ws]);
 
   const sendMessage = () => {
@@ -84,10 +83,10 @@ export default function Chat({ match }) {
         </Header>
         <Messages>
           {messages.map(el => (
-            <Message key={el.id} owner={el.owner}>{el.content}</Message>
+            <Message key={el.id} owner={el.owner} error={!!el.error}>{el.content}</Message>
           ))}
         </Messages>
-        <Controller>
+        <Controller myState={myState}>
           <img
             src={`https://api.adorable.io/avatars/150/${user.email}.png`}
             alt="user"

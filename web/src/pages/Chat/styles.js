@@ -16,9 +16,8 @@ export const Content = styled.div`
   display: flex;
   flex-direction: column;
   border-radius: 4px;
-  overflow:hidden;
-  box-shadow:1px 1px 3px 1px rgba(0,0,0,0.1);
-
+  overflow: hidden;
+  box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.1);
 `;
 
 export const Header = styled.div`
@@ -45,7 +44,7 @@ export const Header = styled.div`
 
 export const Messages = styled.div`
   width: 100%;
-  height:100%;
+  height: 100%;
   flex: 1;
   padding: 1rem;
   overflow-y: auto;
@@ -59,9 +58,9 @@ export const Message = styled.p`
   padding: 8px 16px;
   color: #666;
   background: ${props => (props.owner ? "#eee" : "#32a89c33")};
-  opacity: ${props => props.error ? 0.3 : 1};
+  opacity: ${props => (props.error ? 0.3 : 1)};
   border-radius: 4px;
-  margin:4px 0;
+  margin: 4px 0;
 `;
 
 export const Controller = styled.div`
@@ -73,21 +72,23 @@ export const Controller = styled.div`
     height: 50px;
     border-radius: 50%;
     margin-right: 1rem;
+    border: 3px solid ${props => (props.myState ? "#67ff67" : "#ff6767")};
+    box-shadow:1px 1px 3px 1px rgba(0,0,0,0.1);
   }
   textarea {
     flex: 1;
     background: #ddd;
     border: 0;
     height: 35px;
-    border-radius:4px;
+    border-radius: 4px;
   }
   button {
     height: 35px;
     padding: 0 1rem;
     border: 0px;
     background: #6688ff;
-    border-radius:4px;
-    margin-left:4px;
+    border-radius: 4px;
+    margin-left: 4px;
     color: #fff;
     font-size: bold;
   }
