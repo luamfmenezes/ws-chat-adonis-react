@@ -17,13 +17,11 @@ export default function Chat({ match }) {
   const [recipient, setRecipent] = useState({});
   const [text, setText] = useState("");
   const user = useSelector(state => state.user.profile);
-  const messages = useSelector(state => state.chat.messages);
-
+  const messages = useSelector(state => state.chat[id] || []);
   const dispatch = useDispatch();
 
-
   useEffect(() => {
-    async function getRecipient(){
+    async function getRecipient() {
       const response = await api.get(`/users/${id}`);
       setRecipent(response.data);
       setLoading(false);
@@ -41,7 +39,14 @@ export default function Chat({ match }) {
       id: user.id,
       data: { to: recipient.id, content: text }
     });
+    setText('');
   };
+
+  const handleTextArea = e => {
+    if (e.key === 'Enter') {
+      sendMessage();
+    }
+  }
 
   return (
     <Container>
@@ -61,8 +66,8 @@ export default function Chat({ match }) {
           )}
         </Header>
         <Messages>
-          {messages.map((el,index) => (
-            <Message key={index} owner={el.owner} error={!!el.error}>
+          {messages.map((el, index) => (
+            <Message key={index} owner={el.to == user.id} error={!!el.error}>
               {el.content}
             </Message>
           ))}
@@ -72,7 +77,7 @@ export default function Chat({ match }) {
             src={`https://api.adorable.io/avatars/150/${user.email}.png`}
             alt="user"
           />
-          <textarea value={text} onChange={e => setText(e.target.value)} />
+          <textarea onKeyPress={handleTextArea} value={text} onChange={e => setText(e.target.value)} />
           <button onClick={sendMessage}>Enviar</button>
         </Controller>
       </Content>

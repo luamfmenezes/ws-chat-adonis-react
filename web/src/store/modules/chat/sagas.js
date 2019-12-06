@@ -41,8 +41,11 @@ export function subscribeChat({ ws, id }) {
       ws.getSubscription(`chat:${id}`) || ws.subscribe(`chat:${id}`);
 
     channel.on("message", data => {
-      console.log("Recived one message", data);
-      return emiter({type:"ADD_MESSAGE", data});
+      return emiter({ type: "ADD_MESSAGE", data });
+    });
+
+    channel.on("messageToMe", data => {
+      return emiter({ type: "ADD_MY_MESSAGE", data });
     });
 
     return () => {
@@ -58,7 +61,6 @@ export function sendMessage(ws, { id, data }) {
 }
 
 export function* initWebsocket() {
-  console.log("Initi websocket");
   const token = yield select(state => state.auth.token);
   const ws = Ws("ws://localhost:3333").withJwtToken(token);
   connect(ws);

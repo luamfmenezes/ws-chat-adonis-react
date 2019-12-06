@@ -6,7 +6,7 @@ export const Container = styled.div`
   align-items:center;
   padding:2rem;
   > h1{
-      color:#888;
+      color:#fff;
       font-size:1rem;
       margin-bottom:1rem;
   }
@@ -16,7 +16,6 @@ export const User = styled.div`
   width:400px;
   background:rgba(255,255,255,0.1);
   background:#fff;
-  /* background:rgba(0,0,0,0.1); */
   border-radius:4px;
   margin:4px;
   display:flex;

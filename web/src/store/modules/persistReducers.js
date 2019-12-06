@@ -6,7 +6,7 @@ export default reducers => {
         {
             key: 'gobarber',
             storage,
-            whitelist: ['user', 'auth'],
+            whitelist: ['user', 'auth', 'chat'],
         },
         reducers
     );

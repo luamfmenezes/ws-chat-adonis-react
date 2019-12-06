@@ -3,8 +3,8 @@ import styled from "styled-components";
 export const Container = styled.div`
   height: 64px;
   background: #333;
-  background: rgba(0, 0, 0, 0.7);
   background: #32a89c;
+  background: rgba(0, 0, 0, 0.2);
   padding: 0 30px;
 `;
 
@@ -53,6 +53,10 @@ export const Profile = styled.div`
       margin-top: 2px;
       font-size: 12px;
       color: #ddd;
+      cursor: pointer;
+      &:hover{
+        text-decoration:underline;
+      }
     }
   }
   img {

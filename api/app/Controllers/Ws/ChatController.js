@@ -6,7 +6,6 @@ class ChatController {
   constructor({ socket, request, auth }) {
     this.socket = socket;
     this.request = request;
-    // console.log(socket.channel.subscriptions.has('chat:1'));
     const [, id] = socket.topic.split(":");
     console.log("subscrived with id: ", id);
     if (auth.user.id !== Number(id)) {
@@ -14,15 +13,17 @@ class ChatController {
     }
   }
 
-  onMessage(data) {
-    const { to } = data;
+  onMessage(message) {
+    const { to, content } = message;
+    const [, from] = this.socket.topic.split(":");
+    const data = { to, content, from };
     const chat = Ws.getChannel("chat:*");
-    console.log('Send message to ',to);
+    console.log(data);
     try {
       chat.topic(`chat:${to}`).broadcast("message", data);
-      this.socket.broadcastToAll("message", data);
+      this.socket.broadcastToAll("messageToMe", data);
     } catch (err) {
-      this.socket.broadcastToAll("message", { ...data, error: true });
+      this.socket.broadcastToAll("messageToMe", { ...data, error: true });
     }
   }
 }
