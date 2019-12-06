@@ -17,6 +17,7 @@ class ChatController {
   onMessage(data) {
     const { to } = data;
     const chat = Ws.getChannel("chat:*");
+    console.log('Send message to ',to);
     try {
       chat.topic(`chat:${to}`).broadcast("message", data);
       this.socket.broadcastToAll("message", data);
