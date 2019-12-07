@@ -24,7 +24,7 @@ export default function Header() {
         <nav>
           <FiMessageCircle size={32} color="#fff" />
           <div />
-          <Link to="/dashboard">USUÁRIOS</Link>
+          <Link to="/dashboard">INICIO</Link>
         </nav>
         <aside>
           <Profile>

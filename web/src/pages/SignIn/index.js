@@ -5,6 +5,7 @@ import { Form, Input } from '@rocketseat/unform';
 import * as Yup from 'yup';
 
 import { SignInRequest } from '../../store/modules/auth/actions';
+import { IoIosFingerPrint } from 'react-icons/io';
 
 const schema = Yup.object().shape({
     email: Yup.string()
@@ -24,18 +25,18 @@ export default function SignIn() {
 
     return (
         <>
-            {/* <img src={require('../../assets/logo.svg')} alt="logo" /> */}
+            <IoIosFingerPrint size={120} color="#fff" />
             <Form schema={schema} onSubmit={handleSubmit}>
-                <Input name="email" type="email" placeholder="Your e-mail" />
+                <Input name="email" type="email" placeholder="Seu e-mail" />
                 <Input
                     name="password"
                     type="password"
-                    placeholder="Your secret key"
+                    placeholder="Sua senha secreta"
                 />
                 <button type="submit">
                     {loading ? 'Loading...' : 'Login'}
                 </button>
-                <Link to="/register">Create free acount</Link>
+                <Link to="/register">Criar conta</Link>
             </Form>
         </>
     );

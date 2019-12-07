@@ -5,6 +5,8 @@ import { Form, Input, Scope } from '@rocketseat/unform';
 import * as Yup from 'yup';
 import {SignUpRequest} from '../../store/modules/auth/actions';
 
+import {FiUserPlus} from 'react-icons/fi';
+
 const schema = Yup.object().shape({
     name: Yup.string().required('Name is necessary'),
     email: Yup.string()
@@ -22,18 +24,18 @@ export default function SignUp() {
     };
     return (
         <>
-            {/* <img src={require('../../assets/logo.svg')} alt="logo" /> */}
+            <FiUserPlus color="#fff" size={120}/>
             <Form schema={schema} onSubmit={handleSubmit}>
-                <Input name="name" placeholder="Name" />
-                <Input name="email" type="email" placeholder="Your e-mail" />
+                <Input name="name" placeholder="Nome completo" />
+                <Input name="email" type="email" placeholder="Seu e-mail" />
                 <Input
                     name="password"
                     type="password"
-                    placeholder="Your secret key"
+                    placeholder="Sua senha secreta"
                 />
 
                 <button type="submit">Create</button>
-                <Link to="/">Alread have a login</Link>
+                <Link to="/">Já possuo uma conta</Link>
             </Form>
         </>
     );

@@ -26,7 +26,7 @@ export default function Dashboard({history}) {
       {users.map(profile => (
         <User key={profile.id} onClick={() => history.push(`/chat/${profile.id}`)}>
           <img
-            src={`https://api.adorable.io/avatars/50/${profile.email}.png`}
+            src={`https://api.adorable.io/avatars/50/y${profile.email}.png`}
             alt="Profile"
           />
           <div>

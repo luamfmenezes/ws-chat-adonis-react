@@ -61,10 +61,11 @@ export const Messages = styled.div`
 `;
 
 export const Message = styled.p`
+max-width:50%;
   align-self: ${props => (props.owner ? "baseline" : "flex-end")};
   padding: 8px 16px;
-  color: #666;
-  background: ${props => (props.owner ? "#eee" : "#32a89c33")};
+  color: ${props => (props.owner ? "#333" : "#fff")};
+  background: ${props => (props.owner ? "#eee" : "#32a89c")};
   opacity: ${props => (props.error ? 0.3 : 1)};
   border-radius: 4px;
   margin: 4px 0;
@@ -82,22 +83,30 @@ export const Controller = styled.div`
     border: 3px solid #eee;
     box-shadow:1px 1px 3px 1px rgba(0,0,0,0.1);
   }
-  textarea {
+  input {
     flex: 1;
     background: #ddd;
     background: rgba(0,0,0,0.2);
     border: 0;
     height: 35px;
     border-radius: 4px;
+    color:#fff;
+    padding-left:1rem;
   }
   button {
-    height: 35px;
-    padding: 0 1rem;
-    border: 0px;
-    background: #6688ff;
-    border-radius: 4px;
     margin-left: 4px;
-    color: #fff;
-    font-size: bold;
-  }
+            height: 35px;
+            background: #3b9eff;
+            /* font-weight: bold; */
+            padding:0 1rem;
+            color: #fff;
+            border: 0px;
+            border-radius: 4px;
+            font-size: 16px;
+            transition: background 0.2s;
+            &:hover {
+                background: #2b8edf;
+            }
+        }
+
 `;

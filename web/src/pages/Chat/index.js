@@ -77,7 +77,7 @@ export default function Chat({ match }) {
             src={`https://api.adorable.io/avatars/150/${user.email}.png`}
             alt="user"
           />
-          <textarea onKeyPress={handleTextArea} value={text} onChange={e => setText(e.target.value)} />
+          <input onKeyPress={handleTextArea} value={text} onChange={e => setText(e.target.value)} />
           <button onClick={sendMessage}>Enviar</button>
         </Controller>
       </Content>

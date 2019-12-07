@@ -22,8 +22,10 @@ Route.get("/", () => {
 
 Route.post("/users", "UserController.store");
 
-Route.get("/users", "UserController.index");
-Route.get("/users/:id", "UserController.show");
+Route.group(() => {
+  Route.get("/users", "UserController.index");
+  Route.get("/users/:id", "UserController.show");
+}).middleware(["auth"]);
 
 Route.post("/sessions", "SessionController.store");
 

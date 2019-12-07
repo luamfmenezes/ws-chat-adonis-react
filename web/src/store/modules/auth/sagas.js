@@ -10,11 +10,11 @@ export function* signIn({ payload }) {
 
         const response = yield call(api.post, 'sessions', { email, password });
         
-        console.log(response);
         
         const { token, user } = response.data;
+        console.log(token);
         
-        api.defaults.headers['Authorization'] = `bearber ${token}`;
+        api.defaults.headers['Authorization'] = `bearer ${token}`;
         
         yield put(SignInSucess({ token, user }));
         
@@ -48,13 +48,15 @@ export function setToken({ payload }) {
     if (!payload) return;
 
     const { token } = payload.auth;
+    console.log(token);
 
     if (token) {
-        api.defaults.headers['Authorization'] = `bearber ${token}`;
+        api.defaults.headers['Authorization'] = `bearer ${token}`;
     }
 }
 
 export function signOut() {
+    api.defaults.headers['Authorization'] = '';
     history.push('/');
 }
 
